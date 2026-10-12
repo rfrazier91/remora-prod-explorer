@@ -3,472 +3,99 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Remora Explorer Hub</title>
+  <title>Remora Production Explorer</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --bg: #0a0a0a;
-      --surface: #111827;
-      --border: #1f2937;
-      --accent: #1f6feb;
-      --accent-glow: rgba(31, 111, 235, 0.15);
-      --text: #f9fafb;
-      --muted: #6b7280;
-      --green: #22c55e;
-      --red: #ef4444;
-      --orange: #f97316;
-      --purple: #a855f7;
-    }
-
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      font-family: system-ui, -apple-system, sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
-    /* ── Header ── */
     header {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 18px 40px;
+      background: #1a3a5c;
+      padding: 14px 32px;
       display: flex;
       align-items: center;
       gap: 14px;
     }
 
-    .logo-mark {
-      width: 38px;
-      height: 38px;
-      background: var(--accent);
-      border-radius: 8px;
+    .logo {
+      width: 32px;
+      height: 32px;
+      background: #c8820a;
+      border-radius: 5px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
-      font-weight: 800;
+      font-weight: 700;
+      font-size: 15px;
       color: #fff;
       flex-shrink: 0;
     }
 
-    .header-text h1 {
-      font-size: 20px;
+    header h1 {
+      font-size: 17px;
       font-weight: 700;
-      color: var(--text);
-      line-height: 1.2;
-    }
-
-    .header-text p {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    /* ── Hero ── */
-    .hero {
-      text-align: center;
-      padding: 72px 24px 48px;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      padding: 4px 14px;
-      border-radius: 20px;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      font-size: 11px;
-      font-weight: 600;
+      color: #ffffff;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 20px;
     }
 
-    .hero h2 {
-      font-size: 42px;
-      font-weight: 800;
-      color: var(--text);
-      line-height: 1.15;
-      margin-bottom: 16px;
-      letter-spacing: -0.02em;
-    }
-
-    .hero h2 span {
-      background: linear-gradient(135deg, var(--accent), #58a6ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero p {
-      font-size: 16px;
-      color: var(--muted);
-      max-width: 520px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-
-    /* ── Cards Grid ── */
-    .cards-section {
-      padding: 0 40px 80px;
-      max-width: 1100px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    .section-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-label::after {
-      content: '';
+    main {
       flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-    }
-
-    /* ── Explorer Card ── */
-    .explorer-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 28px;
-      text-decoration: none;
-      color: inherit;
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .explorer-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--card-accent, var(--accent));
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
-    .explorer-card:hover {
-      border-color: var(--card-accent, var(--accent));
-      box-shadow: 0 0 0 1px var(--card-accent, var(--accent)), 0 8px 32px rgba(0,0,0,0.4);
-      transform: translateY(-2px);
-    }
-
-    .explorer-card:hover::before {
-      opacity: 1;
-    }
-
-    .card-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .card-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-
-    .card-status {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 12px;
-    }
-
-    .status-live {
-      background: rgba(34, 197, 94, 0.15);
-      color: var(--green);
-    }
-
-    .status-soon {
-      background: rgba(107, 114, 128, 0.2);
-      color: var(--muted);
-    }
-
-    .card-name {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.2;
-    }
-
-    .card-subtitle {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    .card-description {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    .card-metrics {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .metric-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 3px 10px;
-      border-radius: 6px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .metric-chip .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-    }
-
-    .card-cta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 4px;
-    }
-
-    .cta-text {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--card-accent, var(--accent));
-    }
-
-    .cta-arrow {
-      font-size: 16px;
-      color: var(--card-accent, var(--accent));
-      transition: transform 0.2s;
-    }
-
-    .explorer-card:hover .cta-arrow {
-      transform: translateX(4px);
-    }
-
-    /* ── Footer ── */
-    footer {
-      margin-top: auto;
-      border-top: 1px solid var(--border);
-      padding: 20px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .footer-left {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .footer-right {
-      font-size: 11px;
-      color: #374151;
-    }
-
-    /* ── Stats row ── */
-    .stats-row {
-      display: flex;
+      padding: 60px 24px;
       gap: 32px;
-      justify-content: center;
-      padding: 32px 40px;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 40px;
-      flex-wrap: wrap;
     }
 
-    .stat-item {
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .btn {
+      display: block;
       text-align: center;
-    }
-
-    .stat-value {
-      font-size: 28px;
-      font-weight: 800;
-      color: var(--text);
-      letter-spacing: -0.02em;
-    }
-
-    .stat-label {
-      font-size: 11px;
-      color: var(--muted);
-      margin-top: 4px;
-      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 24px;
+      font-size: 14px;
+      font-weight: 600;
       letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #ffffff;
+      background: #1a3a5c;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s;
     }
 
-    @media (max-width: 640px) {
-      header { padding: 16px 20px; }
-      .hero { padding: 48px 20px 32px; }
-      .hero h2 { font-size: 28px; }
-      .cards-section { padding: 0 20px 60px; }
-      .cards-grid { grid-template-columns: 1fr; }
-      footer { flex-direction: column; text-align: center; }
-      .stats-row { gap: 20px; }
+    .btn:hover {
+      background: #c8820a;
     }
   </style>
 </head>
 <body>
-
-  <!-- Header -->
   <header>
-    <div class="logo-mark">R</div>
-    <div class="header-text">
-      <h1>Remora Management LLC</h1>
-      <p>Texas Gulf Coast · South Texas · Southeast Texas · East Texas</p>
-    </div>
+    <div class="logo">R</div>
+    <h1>Remora Production Explorer</h1>
   </header>
-
-  <!-- Hero -->
-  <div class="hero">
-    <div class="hero-badge">Production Analytics</div>
-    <h2>Field <span>Explorer Hub</span></h2>
-    <p>Live production data, well tests, and pressure analytics across Remora's operated assets.</p>
-  </div>
-
-  <!-- Stats Row -->
-  <div class="stats-row">
-    <div class="stat-item">
-      <div class="stat-value">3</div>
-      <div class="stat-label">Active Fields</div>
+  <main>
+    <div class="buttons">
+      <a href="https://magnet-prod-explorer.netlify.app/" class="btn">Magnet Withers</a>
+      <a href="https://keeran-prod-explorer.netlify.app/" class="btn">Keeran Ranch</a>
+      <a href="https://markham-prod-explorer.netlify.app/" class="btn">Markham-NBC</a>
     </div>
-    <div class="stat-item">
-      <div class="stat-value">Live</div>
-      <div class="stat-label">Data Feed</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-value">RRC</div>
-      <div class="stat-label">Operator #701560</div>
-    </div>
-  </div>
-
-  <!-- Cards -->
-  <div class="cards-section">
-    <div class="section-label">Production Explorers</div>
-    <div class="cards-grid">
-
-      <!-- Magnet Withers -->
-      <a href="https://magnet-prod-explorer.netlify.app/" class="explorer-card" style="--card-accent: #22c55e;">
-        <div class="card-header">
-          <div class="card-icon" style="background: rgba(34,197,94,0.12);">🛢️</div>
-          <span class="card-status status-live">● Live</span>
-        </div>
-        <div>
-          <div class="card-name">Magnet Withers</div>
-          <div class="card-subtitle">Wharton County, TX</div>
-        </div>
-        <div class="card-description">
-          Oil production, well tests, and field pressure analytics for the Magnet Withers unit.
-        </div>
-        <div class="card-metrics">
-          <span class="metric-chip"><span class="dot" style="background:#22c55e;"></span>Oil</span>
-          <span class="metric-chip"><span class="dot" style="background:#3b82f6;"></span>Water</span>
-          <span class="metric-chip"><span class="dot" style="background:#f97316;"></span>Pressure</span>
-          <span class="metric-chip"><span class="dot" style="background:#a855f7;"></span>SWD</span>
-        </div>
-        <div class="card-cta">
-          <span class="cta-text">Open Explorer</span>
-          <span class="cta-arrow">→</span>
-        </div>
-      </a>
-
-      <!-- Keeran Ranch -->
-      <a href="https://keeran-prod-explorer.netlify.app/" class="explorer-card" style="--card-accent: #1f6feb;">
-        <div class="card-header">
-          <div class="card-icon" style="background: rgba(31,111,235,0.12);">⛽</div>
-          <span class="card-status status-live">● Live</span>
-        </div>
-        <div>
-          <div class="card-name">Keeran Ranch</div>
-          <div class="card-subtitle">Texas Gulf Coast</div>
-        </div>
-        <div class="card-description">
-          Daily production volumes, SWD discharge pressures, and well test records for Keeran Ranch operations.
-        </div>
-        <div class="card-metrics">
-          <span class="metric-chip"><span class="dot" style="background:#22c55e;"></span>Oil</span>
-          <span class="metric-chip"><span class="dot" style="background:#3b82f6;"></span>Water</span>
-          <span class="metric-chip"><span class="dot" style="background:#f97316;"></span>Field PSI</span>
-          <span class="metric-chip"><span class="dot" style="background:#a855f7;"></span>SWD PSI</span>
-        </div>
-        <div class="card-cta">
-          <span class="cta-text">Open Explorer</span>
-          <span class="cta-arrow">→</span>
-        </div>
-      </a>
-
-      <!-- Markham-NBC -->
-      <a href="https://markham-prod-explorer.netlify.app/" class="explorer-card" style="--card-accent: #f97316;">
-        <div class="card-header">
-          <div class="card-icon" style="background: rgba(249,115,22,0.12);">🔥</div>
-          <span class="card-status status-live">● Live</span>
-        </div>
-        <div>
-          <div class="card-name">Markham-NBC</div>
-          <div class="card-subtitle">Matagorda County, TX</div>
-        </div>
-        <div class="card-description">
-          Dual-battery production explorer with oil, gas, and water volumes for F and L batteries at the Markham field.
-        </div>
-        <div class="card-metrics">
-          <span class="metric-chip"><span class="dot" style="background:#22c55e;"></span>Oil</span>
-          <span class="metric-chip"><span class="dot" style="background:#ef4444;"></span>Gas</span>
-          <span class="metric-chip"><span class="dot" style="background:#3b82f6;"></span>Water</span>
-          <span class="metric-chip"><span class="dot" style="background:#f97316;"></span>F / L Battery</span>
-        </div>
-        <div class="card-cta">
-          <span class="cta-text">Open Explorer</span>
-          <span class="cta-arrow">→</span>
-        </div>
-      </a>
-
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-left">
-      Remora Management LLC &nbsp;·&nbsp; RRC Operator #701560 &nbsp;·&nbsp; Houston, TX
-    </div>
-    <div class="footer-right">Internal Use Only</div>
-  </footer>
-
+  </main>
 </body>
 </html>
