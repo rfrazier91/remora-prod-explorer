@@ -4,97 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Remora Production Explorer</title>
+  <link rel="icon" type="image/png" href="/logo.png" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
-      background: #ffffff;
-      color: #1a1a1a;
-      font-family: system-ui, -apple-system, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      background: #ffffff; color: #1c2128; font-family: monospace;
+      min-height: 100vh; display: flex; flex-direction: column;
     }
-
     header {
-      background: #1a3a5c;
-      padding: 14px 32px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
+      background: #ffffff; border-bottom: 1px solid #d8dee4;
+      height: 56px; padding: 0 24px; display: flex; align-items: center; gap: 12px;
     }
-
-    .logo {
-      width: 32px;
-      height: 32px;
-      background: #c8820a;
-      border-radius: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 15px;
-      color: #fff;
-      flex-shrink: 0;
+    header img { width: 38px; height: 38px; object-fit: contain; }
+    header h1 { font-size: 15px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+    main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 48px 16px; }
+    .card {
+      background: #f7f8fa; border: 1px solid #d8dee4; border-radius: 12px;
+      padding: 40px 48px; width: 100%; max-width: 420px; text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
     }
-
-    header h1 {
-      font-size: 17px;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 60px 24px;
-      gap: 32px;
-    }
-
-    .buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      width: 100%;
-      max-width: 300px;
-    }
-
+    .card img { width: 64px; height: 64px; object-fit: contain; margin-bottom: 20px; }
+    .title { font-size: 15px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
+    .sub { font-size: 12px; color: #6a737d; letter-spacing: 0.05em; margin-bottom: 28px; }
     .btn {
-      display: block;
-      text-align: center;
-      text-decoration: none;
-      padding: 14px 24px;
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #ffffff;
-      background: #1a3a5c;
-      border: none;
-      cursor: pointer;
-      transition: background 0.15s;
+      display: block; text-decoration: none; margin-top: 12px;
+      padding: 12px 16px; border-radius: 4px; font-family: monospace;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #ffffff; background: #b9710f; border: 2px solid #b9710f;
+      transition: background 0.15s, color 0.15s;
     }
-
-    .btn:hover {
-      background: #c8820a;
-    }
+    .btn:hover { background: #ffffff; color: #b9710f; }
+    @media (max-width: 480px) { .card { padding: 32px 20px; } }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo">R</div>
+    <img src="/logo.png" alt="Remora" />
     <h1>Remora Production Explorer</h1>
   </header>
   <main>
-    <div class="buttons">
-      <a href="https://magnet-prod-explorer.netlify.app/" class="btn">Magnet Withers</a>
-      <a href="https://keeran-prod-explorer.netlify.app/" class="btn">Keeran Ranch</a>
-      <a href="https://markham-prod-explorer.netlify.app/" class="btn">Markham-NBC</a>
+    <div class="card">
+      <img src="/logo.png" alt="Remora" />
+      <div class="title">Production Explorers</div>
+      <div class="sub">Select a field</div>
+      <a class="btn" href="https://magnet-prod-explorer.netlify.app/">Magnet Withers</a>
+      <a class="btn" href="https://keeran-prod-explorer.netlify.app/">Keeran Ranch</a>
+      <a class="btn" href="https://markham-prod-explorer.netlify.app/">Markham-NBC</a>
     </div>
   </main>
 </body>
